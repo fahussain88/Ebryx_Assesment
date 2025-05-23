@@ -19,6 +19,10 @@ It's set to send error codes after some executions to populate records for Logs 
 ![Kubernetes-SA,CM,Secrets](https://github.com/user-attachments/assets/c48d4d08-3388-4a25-83a7-a9c8becc9580)
 ### Latest Deployment Status of python App with HPA based on Metrics Monitoring
 ![Latest Deployment Status](https://github.com/user-attachments/assets/aabc09eb-7dab-4a84-8907-84071429f2f1)
+### Kubernetes CNI-CRI-Metrics_server-NodeStatus
+![Kubernetes CNI-CRI-Metrics_server-NodeStatus](https://github.com/user-attachments/assets/ead12345-dca4-4514-9513-c2a18eac16b7)
+### Installed Helm Charts alongwith Revisions
+![Kubernetes_HelmCharts_list](https://github.com/user-attachments/assets/7ff6b559-0f35-4564-a7e7-e7ba2967d7cb)
 
-CheckList for Tasks
+##CheckList for Tasks
 [Google Sheet Link Click Here](https://docs.google.com/spreadsheets/d/1_tItwNAgroaSW2NPevnKefDf4IDatfNqlHy3IMXqH-k/edit?usp=sharing).
