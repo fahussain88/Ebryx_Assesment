@@ -41,5 +41,5 @@ jobs:
         run: |
           SHORT_SHA=$(echo $GITHUB_SHA | cut -c1-7)
           helm upgrade --install py-app-release ./py-app-helm-chart \
-            --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME:$SHORT_SHA \  
+            --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME \
             --set image.tag=$SHORT_SHA
