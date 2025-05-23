@@ -1,0 +1,45 @@
+name: python_app_CICD
+
+on:
+  push:
+    branches: [ master ]
+
+env:
+  IMAGE_NAME: python_app
+  REGISTRY: docker.io
+  REPO: ${{ secrets.DOCKERHUB_USERNAME }}/python_app
+  TAG: ${{ github.sha }}
+jobs:
+
+  test_build:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Log in to DockerHub
+        run: echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+      - name: Build Docker Image
+        run: |
+          SHORT_SHA=$(echo $GITHUB_SHA | cut -c1-7)
+          docker build -t $IMAGE_NAME:$SHORT_SHA .
+
+      - name: Push Image to DockerHub
+        run: |
+          SHORT_SHA=$(echo $GITHUB_SHA | cut -c1-7)
+          docker push $IMAGE_NAME:$SHORT_SHA
+
+  deploy:
+    needs: test_build
+    runs-on: self-hosted
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Deploy using Helm
+        run: |
+          SHORT_SHA=$(echo $GITHUB_SHA | cut -c1-7)
+          helm upgrade --install py-app-release ./py-app-helm-chart \
+            --set image.repository=${{ secrets.DOCKERHUB_REPO }} \
+            --set image.tag=$SHORT_SHA
