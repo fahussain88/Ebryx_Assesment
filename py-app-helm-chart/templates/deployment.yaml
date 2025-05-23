@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "py-app-helm-chart.fullname" . }}
+  labels:
+    app: {{ include "py-app-helm-chart.fullname" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ include "py-app-helm-chart.fullname" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "py-app-helm-chart.fullname" . }}
+    spec:
+      containers:
+        - name: py-app
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 5000
+          resources:
+            limits:
+              cpu: {{ .Values.resources.limits.cpu }}
+              memory: {{ .Values.resources.limits.memory }}
+            requests:
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory: {{ .Values.resources.requests.memory }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.readiness_probe.path }}
+              port: {{ .Values.readiness_probe.port }}
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.liveness_probe.path }}
+              port: {{ .Values.liveness_probe.port }}
+            initialDelaySeconds: 15
+            periodSeconds: 20

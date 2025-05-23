@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "py-app-helm-chart.fullname" . }}
+  labels:
+    app: {{ include "py-app-helm-chart.fullname" . }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 5000
+      nodePort: {{ .Values.service.nodePort | default 30080 }}
+  selector:
+    app: {{ include "py-app-helm-chart.fullname" . }}

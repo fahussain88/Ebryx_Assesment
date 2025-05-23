@@ -1,0 +1,31 @@
+image:
+  repository: test1fiaz/python_app
+  tag: "3.0"
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 5000
+  nodePort: 30080
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+readiness_probe:
+  path: /healthz
+  port: 5000
+
+liveness_probe:
+  path: /failcheck
+  port: 5000
+
+hpa:
+  enabled: true
+  min_replicas: 1
+  max_replicas: 3
+  target_cpu_utilization_percentage: 50
