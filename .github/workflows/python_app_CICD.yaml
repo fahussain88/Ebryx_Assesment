@@ -29,7 +29,7 @@ jobs:
         run: |
           SHORT_SHA=$(echo $GITHUB_SHA | cut -c1-7)
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME:$SHORT_SHA
-
+#
   deploy:
     needs: test_build
     runs-on: self-hosted
