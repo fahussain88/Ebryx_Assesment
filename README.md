@@ -1,7 +1,7 @@
-![Latest Deployment Status](https://github.com/user-attachments/assets/04fbf9bd-232d-4546-bd05-e9156e9c8439)# Ebryx_Assesment
+# Ebryx_Assesment
 [![python_app_CICD](https://github.com/fahussain88/Ebryx_Assesment/actions/workflows/python_app_CICD.yaml/badge.svg)](https://github.com/fahussain88/Ebryx_Assesment/actions/workflows/python_app_CICD.yaml)
 
-## Screen Shots
+## Tasks Description & Screenshots
 ### Main Page
 ![AppStatus1](https://github.com/user-attachments/assets/31f1ec1f-062c-4555-b8bc-3ce3850d5a00)
 ### /healthz
